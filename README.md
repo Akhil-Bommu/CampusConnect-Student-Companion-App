@@ -65,3 +65,19 @@ Used a `Row` of `Column` items for quick actions, and a `Stack` with `Positioned
 
 ![layouts code](screenshots/exp2/03_layouts_code.png)
 ![layouts output](screenshots/exp2/04_layouts_output.png)
+
+## Experiment 3 – Responsive UI
+
+### 3a. Responsive layout
+The Events screen (`lib/screens/events_screen.dart`) uses `LayoutBuilder` to show a single-column list on small screens and a 2-column grid on wide screens.
+
+![layoutbuilder code](screenshots/exp3/01_layoutbuilder_code.png)
+![phone view](screenshots/exp3/02_phone_view.png)
+![wide view](screenshots/exp3/03_wide_view.png)
+
+### 3b. MediaQuery and breakpoints
+Used `MediaQuery` to read the screen width and defined breakpoints at 600 px and 900 px: 1 column below 600, 2 columns from 600 to 899, and 3 columns from 900 up. Padding also increases on larger screens.
+
+![mediaquery code](screenshots/exp3/04_mediaquery_code.png)
+![one column](screenshots/exp3/05_one_column.png)
+![three columns](screenshots/exp3/06_three_columns.png)
