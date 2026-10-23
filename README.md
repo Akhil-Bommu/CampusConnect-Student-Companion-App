@@ -37,3 +37,17 @@ CampusConnect is developed as a hands-on learning project to understand how Flut
 ## Future Enhancements
 
 Additional student-focused features and improvements can be introduced as the project evolves.
+
+## Experiment 1 – Flutter Setup and Dart Basics
+
+### 1a. Flutter and Dart installation
+Installed the Flutter SDK (Dart is bundled with it) and verified the setup using `flutter doctor`. Created the project with `flutter create` and ran the default app.
+
+![flutter doctor](screenshots/exp1/01_flutter_doctor.png)
+![default app](screenshots/exp1/02_default_app.png)
+
+### 1b. Dart basics
+`dart_basics/basics.dart` demonstrates variables, data types, a list, a function, a class, a loop and an if condition.
+
+![code](screenshots/exp1/03_basics_code.png)
+![output](screenshots/exp1/04_basics_output.png)
