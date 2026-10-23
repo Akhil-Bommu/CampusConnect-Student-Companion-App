@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/event_card.dart';
+import '../widgets/fade_slide_in.dart';
 
 class EventsScreen extends StatelessWidget {
   const EventsScreen({super.key});
@@ -35,13 +36,18 @@ class EventsScreen extends StatelessWidget {
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
         childAspectRatio: columns == 1 ? 3.5 : 3,
-        children: events
-            .map((e) => EventCard(
-                  title: e['title']!,
-                  date: e['date']!,
-                  venue: e['venue']!,
-                ))
-            .toList(),
+        children: [
+          // Exp 8b: each card fades and slides in, one after another
+          for (int i = 0; i < events.length; i++)
+            FadeSlideIn(
+              delay: Duration(milliseconds: 150 * i),
+              child: EventCard(
+                title: events[i]['title']!,
+                date: events[i]['date']!,
+                venue: events[i]['venue']!,
+              ),
+            ),
+        ],
       ),
     );
   }

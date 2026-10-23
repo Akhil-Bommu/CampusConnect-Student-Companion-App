@@ -146,3 +146,19 @@ The form uses a `GlobalKey<FormState>` and a `validator` on each field: title is
 ![validation code](screenshots/exp7/04_validation_code.png)
 ![validation errors](screenshots/exp7/05_validation_errors.png)
 ![valid submit](screenshots/exp7/06_valid_submit.png)
+
+## Experiment 8 – Animations
+
+### 8a. Implicit animation
+In `TaskTile`, an `AnimatedContainer` smoothly changes the card's color and border when a task is marked complete (400 ms, `Curves.easeInOut`).
+
+![animatedcontainer code](screenshots/exp8/01_animatedcontainer_code.png)
+![task pending](screenshots/exp8/02_task_pending.png)
+![task done](screenshots/exp8/03_task_done.png)
+
+### 8b. Fade and slide animations
+`FadeSlideIn` (`lib/widgets/fade_slide_in.dart`) is a reusable widget built with an `AnimationController`, `Tween`s, `FadeTransition` and `SlideTransition`. On the Events screen each card fades and slides in with a small delay between cards.
+
+![fade slide code](screenshots/exp8/04_fade_slide_code.png)
+![events animating](screenshots/exp8/05_events_animating.png)
+![events final](screenshots/exp8/06_events_final.png)
