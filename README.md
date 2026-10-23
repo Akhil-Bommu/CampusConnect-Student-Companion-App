@@ -113,3 +113,20 @@ All screens are registered in the `routes` map in `main.dart` (`/`, `/events`, `
 ![provider code](screenshots/exp5/04_provider_code.png)
 ![provider usage](screenshots/exp5/05_provider_usage_code.png)
 ![home pending count](screenshots/exp5/06_home_pending_count.png)
+
+## Experiment 6 – Custom Widgets and Themes
+
+### 6a. Custom widgets
+Created two reusable widgets in `lib/widgets/`: `EventCard` (used on the Events screen) and `TaskTile` (used on the Tasks screen). Each takes its data through the constructor, so the same widget is reused for every event and task.
+
+![event card code](screenshots/exp6/01_eventcard_code.png)
+![task tile code](screenshots/exp6/02_tasktile_code.png)
+![events screen](screenshots/exp6/03_events_screen.png)
+![tasks screen](screenshots/exp6/04_tasks_screen.png)
+
+### 6b. Themes and custom styles
+`lib/theme/app_theme.dart` defines light and dark `ThemeData` (colors from a seed color, app bar, text and button styles) and an `AppStyles` class for shared values like corner radius and padding. Screens read colors and text styles from `Theme.of(context)` instead of hard-coding them.
+
+![theme code](screenshots/exp6/05_theme_code.png)
+![light theme](screenshots/exp6/06_themed_home.png)
+![dark theme](screenshots/exp6/07_dark_mode.png)
