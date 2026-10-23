@@ -51,3 +51,17 @@ Installed the Flutter SDK (Dart is bundled with it) and verified the setup using
 
 ![code](screenshots/exp1/03_basics_code.png)
 ![output](screenshots/exp1/04_basics_output.png)
+
+## Experiment 2 – Widgets and Layouts
+
+### 2a. Basic widgets
+Used `Text`, `Image`, `Container` and `Icon` on the Home screen (`lib/screens/home_screen.dart`). `Container` is styled with padding, color, border and rounded corners.
+
+![widgets code](screenshots/exp2/01_widgets_code.png)
+![widgets output](screenshots/exp2/02_widgets_output.png)
+
+### 2b. Layouts using Row, Column and Stack
+Used a `Row` of `Column` items for quick actions, and a `Stack` with `Positioned` to place a label over an image.
+
+![layouts code](screenshots/exp2/03_layouts_code.png)
+![layouts output](screenshots/exp2/04_layouts_output.png)
