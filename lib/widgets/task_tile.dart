@@ -21,18 +21,35 @@ class TaskTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    final scheme = Theme.of(context).colorScheme;
+
+    // Exp 8a: AnimatedContainer animates smoothly whenever
+    // its color, border or size changes
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: CheckboxListTile(
-        title: Text(
-          task.title,
-          style: TextStyle(
-            decoration: task.isDone ? TextDecoration.lineThrough : null,
-          ),
+      decoration: BoxDecoration(
+        color: task.isDone ? scheme.primaryContainer : scheme.surface,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: task.isDone ? scheme.primary : scheme.outlineVariant,
+          width: task.isDone ? 2 : 1,
         ),
-        subtitle: Text(_subtitle),
-        value: task.isDone,
-        onChanged: onChanged,
+      ),
+      child: Material(
+        type: MaterialType.transparency,
+        child: CheckboxListTile(
+          title: Text(
+            task.title,
+            style: TextStyle(
+              decoration: task.isDone ? TextDecoration.lineThrough : null,
+            ),
+          ),
+          subtitle: Text(_subtitle),
+          value: task.isDone,
+          onChanged: onChanged,
+        ),
       ),
     );
   }
