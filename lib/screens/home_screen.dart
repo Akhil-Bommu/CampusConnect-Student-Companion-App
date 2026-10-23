@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'events_screen.dart';
+import 'announcements_screen.dart';
+import 'tasks_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,15 +16,11 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // ---------- Exp 2a: basic widgets ----------
-
-            // Text widget
             const Text(
               'Welcome, Akhil!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 12),
-
-            // Image widget
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.asset(
@@ -32,8 +31,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-
-            // Container widget
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -44,26 +41,21 @@ class HomeScreen extends StatelessWidget {
               child: const Text('Check today\'s announcements and events.'),
             ),
             const SizedBox(height: 12),
-
-            // Icon widget
             const Icon(Icons.event, size: 40, color: Colors.indigo),
             const SizedBox(height: 24),
 
-            // ---------- Exp 2b: layout widgets ----------
-
-            // Row: places children side by side
-            // Column (inside each item): places children top to bottom
+            // ---------- Exp 2b + 4a: layouts and navigation ----------
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _action(Icons.event, 'Events'),
-                _action(Icons.campaign, 'Announcements'),
-                _action(Icons.task_alt, 'Tasks'),
+                _action(context, Icons.event, 'Events', const EventsScreen()),
+                _action(context, Icons.campaign, 'Announcements',
+                    const AnnouncementsScreen()),
+                _action(context, Icons.task_alt, 'Tasks', const TasksScreen()),
               ],
             ),
             const SizedBox(height: 24),
 
-            // Stack: places children on top of each other
             Stack(
               children: [
                 ClipRRect(
@@ -95,13 +87,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _action(IconData icon, String label) {
-    return Column(
-      children: [
-        Icon(icon, size: 32, color: Colors.indigo),
-        const SizedBox(height: 4),
-        Text(label),
-      ],
+  // Exp 4a: tapping opens another screen using Navigator.push
+  Widget _action(
+      BuildContext context, IconData icon, String label, Widget screen) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => screen),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Icon(icon, size: 32, color: Colors.indigo),
+            const SizedBox(height: 4),
+            Text(label),
+          ],
+        ),
+      ),
     );
   }
 }
