@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/task_provider.dart';
+import '../theme/app_theme.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Exp 5b: Home reads the shared data from TaskProvider
+    final theme = Theme.of(context);
     final pending = context.watch<TaskProvider>().pendingCount;
 
     return Scaffold(
       appBar: AppBar(title: const Text('CampusConnect')),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: AppStyles.screenPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // ---------- Exp 2a: basic widgets ----------
-            const Text(
-              'Welcome, Akhil!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+            Text('Welcome, Akhil!', style: theme.textTheme.headlineSmall),
             const SizedBox(height: 12),
             ClipRRect(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(AppStyles.radius),
               child: Image.asset(
                 'assets/images/campus.jpg',
                 height: 160,
@@ -36,14 +34,17 @@ class HomeScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.indigo.shade50,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.indigo),
+                color: theme.colorScheme.primaryContainer,
+                borderRadius: BorderRadius.circular(AppStyles.radius),
+                border: Border.all(color: theme.colorScheme.primary),
               ),
-              child: Text('You have $pending pending task(s).'),
+              child: Text(
+                'You have $pending pending task(s).',
+                style: TextStyle(color: theme.colorScheme.onPrimaryContainer),
+              ),
             ),
             const SizedBox(height: 12),
-            const Icon(Icons.event, size: 40, color: Colors.indigo),
+            Icon(Icons.event, size: 40, color: theme.colorScheme.primary),
             const SizedBox(height: 24),
 
             // ---------- Exp 2b + 4b: layouts and named routes ----------
@@ -61,7 +62,7 @@ class HomeScreen extends StatelessWidget {
             Stack(
               children: [
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(AppStyles.radius),
                   child: Image.asset(
                     'assets/images/campus.jpg',
                     height: 160,
@@ -99,7 +100,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
-            Icon(icon, size: 32, color: Colors.indigo),
+            Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
             const SizedBox(height: 4),
             Text(label),
           ],

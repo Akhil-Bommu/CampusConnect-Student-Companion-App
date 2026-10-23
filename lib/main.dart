@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/task_provider.dart';
+import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
 import 'screens/events_screen.dart';
 import 'screens/announcements_screen.dart';
@@ -8,7 +9,6 @@ import 'screens/tasks_screen.dart';
 
 void main() {
   runApp(
-    // Exp 5b: makes TaskProvider available to the whole app
     ChangeNotifierProvider(
       create: (context) => TaskProvider(),
       child: const CampusConnectApp(),
@@ -24,7 +24,12 @@ class CampusConnectApp extends StatelessWidget {
     return MaterialApp(
       title: 'CampusConnect',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
+
+      // Exp 6b: app-wide themes
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.light,
+
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
