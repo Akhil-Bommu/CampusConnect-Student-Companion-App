@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'events_screen.dart';
-import 'announcements_screen.dart';
-import 'tasks_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -44,14 +41,14 @@ class HomeScreen extends StatelessWidget {
             const Icon(Icons.event, size: 40, color: Colors.indigo),
             const SizedBox(height: 24),
 
-            // ---------- Exp 2b + 4a: layouts and navigation ----------
+            // ---------- Exp 2b + 4b: layouts and named routes ----------
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _action(context, Icons.event, 'Events', const EventsScreen()),
+                _action(context, Icons.event, 'Events', '/events'),
                 _action(context, Icons.campaign, 'Announcements',
-                    const AnnouncementsScreen()),
-                _action(context, Icons.task_alt, 'Tasks', const TasksScreen()),
+                    '/announcements'),
+                _action(context, Icons.task_alt, 'Tasks', '/tasks'),
               ],
             ),
             const SizedBox(height: 24),
@@ -87,15 +84,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Exp 4a: tapping opens another screen using Navigator.push
+  // Exp 4b: tapping opens a screen by its route name
   Widget _action(
-      BuildContext context, IconData icon, String label, Widget screen) {
+      BuildContext context, IconData icon, String label, String routeName) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => screen),
-        );
+        Navigator.pushNamed(context, routeName);
       },
       child: Padding(
         padding: const EdgeInsets.all(8),

@@ -81,3 +81,19 @@ Used `MediaQuery` to read the screen width and defined breakpoints at 600 px and
 ![mediaquery code](screenshots/exp3/04_mediaquery_code.png)
 ![one column](screenshots/exp3/05_one_column.png)
 ![three columns](screenshots/exp3/06_three_columns.png)
+
+## Experiment 4 – Navigation
+
+### 4a. Navigator
+The Home screen buttons open the Events, Announcements and Tasks screens using `Navigator.push` with `MaterialPageRoute`. `Navigator.pop` returns to the previous screen (Go Back button on the Tasks screen).
+
+![push code](screenshots/exp4/01_push_code.png)
+![home screen](screenshots/exp4/02_home_screen.png)
+![tasks screen](screenshots/exp4/03_tasks_screen.png)
+
+### 4b. Named routes
+All screens are registered in the `routes` map in `main.dart` (`/`, `/events`, `/announcements`, `/tasks`) and opened with `Navigator.pushNamed`.
+
+![routes code](screenshots/exp4/04_routes_code.png)
+![pushNamed code](screenshots/exp4/05_pushnamed_code.png)
+![events via route](screenshots/exp4/06_events_via_route.png)
