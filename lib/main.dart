@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'screens/events_screen.dart';
 
 void main() {
   runApp(const CampusConnectApp());
@@ -14,7 +14,7 @@ class CampusConnectApp extends StatelessWidget {
       title: 'CampusConnect',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
-      home: const HomeScreen(),
+      home: const EventsScreen(), // temporary: Exp 4 will connect all screens
     );
   }
 }
