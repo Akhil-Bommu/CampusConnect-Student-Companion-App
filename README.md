@@ -162,3 +162,19 @@ In `TaskTile`, an `AnimatedContainer` smoothly changes the card's color and bord
 ![fade slide code](screenshots/exp8/04_fade_slide_code.png)
 ![events animating](screenshots/exp8/05_events_animating.png)
 ![events final](screenshots/exp8/06_events_final.png)
+
+## Experiment 9 – REST API
+
+### 9a. Fetching data from a REST API
+`ApiService` (`lib/services/api_service.dart`) uses the `http` package to send a GET request to the JSONPlaceholder API. The JSON response is decoded and converted into `Announcement` objects using a `fromJson` factory (`lib/models/announcement.dart`).
+
+![model code](screenshots/exp9/01_model_code.png)
+![service code](screenshots/exp9/02_service_code.png)
+![plain list](screenshots/exp9/03_plain_list.png)
+
+### 9b. Displaying the data
+The Announcements screen shows a loading spinner while fetching, an error message with a Retry button if the request fails, and the announcements as cards with expandable details once loaded. A refresh button reloads the data.
+
+![ui code](screenshots/exp9/04_ui_code.png)
+![cards expanded](screenshots/exp9/05_cards_expanded.png)
+![error state](screenshots/exp9/06_error_state.png)
