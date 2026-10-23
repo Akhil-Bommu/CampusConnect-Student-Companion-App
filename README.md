@@ -130,3 +130,19 @@ Created two reusable widgets in `lib/widgets/`: `EventCard` (used on the Events 
 ![theme code](screenshots/exp6/05_theme_code.png)
 ![light theme](screenshots/exp6/06_themed_home.png)
 ![dark theme](screenshots/exp6/07_dark_mode.png)
+
+## Experiment 7 – Forms and Validation
+
+### 7a. Form with input fields
+The Add Task screen (`lib/screens/add_task_screen.dart`) has a title field, a multi-line description field, a category dropdown and a date picker field. Saving adds the task through `TaskProvider`, and it appears on the Tasks screen.
+
+![form code](screenshots/exp7/01_form_code.png)
+![form screen](screenshots/exp7/02_form_screen.png)
+![task added](screenshots/exp7/03_task_added.png)
+
+### 7b. Validation and error handling
+The form uses a `GlobalKey<FormState>` and a `validator` on each field: title is required (minimum 3 characters), description is limited to 100 characters, and the due date is required. Errors show under the fields, and a SnackBar confirms a successful save.
+
+![validation code](screenshots/exp7/04_validation_code.png)
+![validation errors](screenshots/exp7/05_validation_errors.png)
+![valid submit](screenshots/exp7/06_valid_submit.png)

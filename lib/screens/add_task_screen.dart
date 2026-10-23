@@ -11,7 +11,9 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  // Controllers read what the user typed
+  // Exp 7b: the key lets us check all fields at once
+  final _formKey = GlobalKey<FormState>();
+
   final _titleController = TextEditingController();
   final _descController = TextEditingController();
   final _dateController = TextEditingController();
@@ -28,7 +30,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     super.dispose();
   }
 
-  // Opens the calendar popup
   Future<void> _pickDate() async {
     final picked = await showDatePicker(
       context: context,
@@ -44,14 +45,24 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   }
 
   void _save() {
+    // validate() runs every validator; false means at least one error
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
     final task = Task(
-      title: _titleController.text,
-      description: _descController.text,
+      title: _titleController.text.trim(),
+      description: _descController.text.trim(),
       category: _category,
       dueDate: _dueDate,
     );
+
+    final messenger = ScaffoldMessenger.of(context);
     context.read<TaskProvider>().addTask(task);
     Navigator.pop(context);
+    messenger.showSnackBar(
+      const SnackBar(content: Text('Task added successfully')),
+    );
   }
 
   @override
@@ -61,30 +72,45 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(
+          key: _formKey,
+          // errors update while the user types, after first interaction
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: Column(
             children: [
-              // Single-line text field
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(
                   labelText: 'Title',
                   border: OutlineInputBorder(),
                 ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Title is required';
+                  }
+                  if (value.trim().length < 3) {
+                    return 'Title must be at least 3 characters';
+                  }
+                  return null; // null means the value is valid
+                },
               ),
               const SizedBox(height: 16),
 
-              // Multi-line text field
               TextFormField(
                 controller: _descController,
                 maxLines: 3,
                 decoration: const InputDecoration(
-                  labelText: 'Description',
+                  labelText: 'Description (optional)',
                   border: OutlineInputBorder(),
                 ),
+                validator: (value) {
+                  if (value != null && value.length > 100) {
+                    return 'Keep the description under 100 characters';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16),
 
-              // Dropdown
               DropdownButtonFormField<String>(
                 value: _category,
                 decoration: const InputDecoration(
@@ -98,7 +124,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Date picker field (tap to choose a date)
               TextFormField(
                 controller: _dateController,
                 readOnly: true,
@@ -108,6 +133,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   border: OutlineInputBorder(),
                   suffixIcon: Icon(Icons.calendar_today),
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please pick a due date';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 24),
 
