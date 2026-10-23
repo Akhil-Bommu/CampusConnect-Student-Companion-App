@@ -1,30 +1,36 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:campusconnect/main.dart';
+import 'package:provider/provider.dart';
+import 'package:campusconnect/providers/task_provider.dart';
+import 'package:campusconnect/screens/add_task_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  // Helper: builds the form inside an app with the provider
+  Widget buildForm() {
+    return ChangeNotifierProvider(
+      create: (_) => TaskProvider(),
+      child: const MaterialApp(home: AddTaskScreen()),
+    );
+  }
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  testWidgets('shows errors when the form is submitted empty',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(buildForm());
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.tap(find.text('Save Task'));
+    await tester.pump(); // rebuild after the tap
+
+    expect(find.text('Title is required'), findsOneWidget);
+    expect(find.text('Please pick a due date'), findsOneWidget);
+  });
+
+  testWidgets('shows an error for a title shorter than 3 characters',
+      (WidgetTester tester) async {
+    await tester.pumpWidget(buildForm());
+
+    await tester.enterText(find.byType(TextFormField).first, 'ab');
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Title must be at least 3 characters'), findsOneWidget);
   });
 }
