@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
-// Custom widget: a reusable row for one task
 class TaskTile extends StatelessWidget {
   final Task task;
   final ValueChanged<bool?> onChanged;
@@ -11,6 +10,14 @@ class TaskTile extends StatelessWidget {
     required this.task,
     required this.onChanged,
   });
+
+  String get _subtitle {
+    final status = task.isDone ? 'Completed' : 'Pending';
+    final due = task.dueDate == null
+        ? ''
+        : ' • Due ${task.dueDate!.day}/${task.dueDate!.month}/${task.dueDate!.year}';
+    return '$status • ${task.category}$due';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +30,7 @@ class TaskTile extends StatelessWidget {
             decoration: task.isDone ? TextDecoration.lineThrough : null,
           ),
         ),
-        subtitle: Text(task.isDone ? 'Completed' : 'Pending'),
+        subtitle: Text(_subtitle),
         value: task.isDone,
         onChanged: onChanged,
       ),

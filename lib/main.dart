@@ -6,6 +6,7 @@ import 'screens/home_screen.dart';
 import 'screens/events_screen.dart';
 import 'screens/announcements_screen.dart';
 import 'screens/tasks_screen.dart';
+import 'screens/add_task_screen.dart';
 
 void main() {
   runApp(
@@ -24,18 +25,16 @@ class CampusConnectApp extends StatelessWidget {
     return MaterialApp(
       title: 'CampusConnect',
       debugShowCheckedModeBanner: false,
-
-      // Exp 6b: app-wide themes
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.light,
-
+      themeMode: ThemeMode.system,
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
         '/events': (context) => const EventsScreen(),
         '/announcements': (context) => const AnnouncementsScreen(),
         '/tasks': (context) => const TasksScreen(),
+        '/add-task': (context) => const AddTaskScreen(),
       },
     );
   }

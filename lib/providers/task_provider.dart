@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
-// ChangeNotifier: can tell listening screens "my data changed"
 class TaskProvider extends ChangeNotifier {
   final List<Task> _tasks = [
     Task(title: 'Submit lab record'),
@@ -15,6 +14,12 @@ class TaskProvider extends ChangeNotifier {
 
   void toggleTask(int index) {
     _tasks[index].isDone = !_tasks[index].isDone;
-    notifyListeners(); // rebuild every screen that is watching
+    notifyListeners();
+  }
+
+  // Exp 7: add a new task from the form
+  void addTask(Task task) {
+    _tasks.add(task);
+    notifyListeners();
   }
 }

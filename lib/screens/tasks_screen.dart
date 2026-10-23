@@ -13,6 +13,7 @@ class TasksScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Tasks')),
       body: ListView.builder(
+        padding: const EdgeInsets.only(bottom: 80),
         itemCount: tasks.length,
         itemBuilder: (context, index) {
           return TaskTile(
@@ -21,6 +22,10 @@ class TasksScreen extends StatelessWidget {
                 context.read<TaskProvider>().toggleTask(index),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, '/add-task'),
+        child: const Icon(Icons.add),
       ),
     );
   }
