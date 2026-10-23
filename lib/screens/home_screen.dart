@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/task_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Exp 5b: Home reads the shared data from TaskProvider
+    final pending = context.watch<TaskProvider>().pendingCount;
+
     return Scaffold(
       appBar: AppBar(title: const Text('CampusConnect')),
       body: SingleChildScrollView(
@@ -35,7 +40,7 @@ class HomeScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.indigo),
               ),
-              child: const Text('Check today\'s announcements and events.'),
+              child: Text('You have $pending pending task(s).'),
             ),
             const SizedBox(height: 12),
             const Icon(Icons.event, size: 40, color: Colors.indigo),
@@ -84,7 +89,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Exp 4b: tapping opens a screen by its route name
   Widget _action(
       BuildContext context, IconData icon, String label, String routeName) {
     return InkWell(

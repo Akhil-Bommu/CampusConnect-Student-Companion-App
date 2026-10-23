@@ -97,3 +97,19 @@ All screens are registered in the `routes` map in `main.dart` (`/`, `/events`, `
 ![routes code](screenshots/exp4/04_routes_code.png)
 ![pushNamed code](screenshots/exp4/05_pushnamed_code.png)
 ![events via route](screenshots/exp4/06_events_via_route.png)
+
+## Experiment 5 – State Management
+
+### 5a. Stateless and stateful widgets
+`HomeScreen` and `EventsScreen` are stateless (fixed content). `TasksScreen` was built as a `StatefulWidget`: the task list lives in its `State` class, and ticking a task calls `setState` so the screen rebuilds with the strikethrough.
+
+![stateful code](screenshots/exp5/01_stateful_code.png)
+![tasks unchecked](screenshots/exp5/02_tasks_unchecked.png)
+![tasks checked](screenshots/exp5/03_tasks_checked.png)
+
+### 5b. setState and Provider
+`setState` only works for data inside one screen. To share tasks across screens, the data moved into `TaskProvider` (a `ChangeNotifier`), made available in `main.dart` with `ChangeNotifierProvider`. The Tasks screen uses `context.watch` to display tasks and `context.read` to toggle them. The Home screen also watches the provider, so the pending-task count updates automatically.
+
+![provider code](screenshots/exp5/04_provider_code.png)
+![provider usage](screenshots/exp5/05_provider_usage_code.png)
+![home pending count](screenshots/exp5/06_home_pending_count.png)

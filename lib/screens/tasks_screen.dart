@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
-import '../models/task.dart';
+import 'package:provider/provider.dart';
+import '../providers/task_provider.dart';
 
-// Stateful widget: its data (the task list) can change
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   const TasksScreen({super.key});
 
   @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-// The State class holds the changing data
-class _TasksScreenState extends State<TasksScreen> {
-  final List<Task> tasks = [
-    Task(title: 'Submit lab record'),
-    Task(title: 'Prepare for quiz'),
-    Task(title: 'Register for Tech Fest'),
-  ];
-
-  @override
   Widget build(BuildContext context) {
+    // watch: rebuild this screen whenever TaskProvider changes
+    final tasks = context.watch<TaskProvider>().tasks;
+
     return Scaffold(
       appBar: AppBar(title: const Text('Tasks')),
       body: ListView.builder(
@@ -34,10 +25,8 @@ class _TasksScreenState extends State<TasksScreen> {
             ),
             value: task.isDone,
             onChanged: (value) {
-              // setState tells Flutter: data changed, rebuild the screen
-              setState(() {
-                task.isDone = value!;
-              });
+              // read: call a method once, without listening
+              context.read<TaskProvider>().toggleTask(index);
             },
           );
         },
