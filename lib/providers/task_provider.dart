@@ -11,6 +11,7 @@ class TaskProvider extends ChangeNotifier {
   List<Task> get tasks => _tasks;
 
   int get pendingCount => _tasks.where((t) => !t.isDone).length;
+  
 
   void toggleTask(int index) {
     _tasks[index].isDone = !_tasks[index].isDone;

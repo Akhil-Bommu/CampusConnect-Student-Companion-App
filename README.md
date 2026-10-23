@@ -178,3 +178,19 @@ The Announcements screen shows a loading spinner while fetching, an error messag
 ![ui code](screenshots/exp9/04_ui_code.png)
 ![cards expanded](screenshots/exp9/05_cards_expanded.png)
 ![error state](screenshots/exp9/06_error_state.png)
+
+## Experiment 10 – Testing and Debugging
+
+### 10a. Tests
+Added widget tests for the Add Task form validation (`test/widget_test.dart`) and the `TaskTile` widget (`test/task_tile_test.dart`), plus unit tests for `TaskProvider` (`test/task_provider_test.dart`). All tests pass with `flutter test`.
+
+![widget test code](screenshots/exp10/01_widget_test_code.png)
+![task tile test code](screenshots/exp10/02_task_tile_test_code.png)
+![tests passed](screenshots/exp10/03_tests_passed.png)
+
+### 10b. Debugging tools
+Used the tools below to find and fix two problems that I introduced on purpose:
+- **Failing test:** a wrong condition in `pendingCount` made a unit test fail, and the test output pointed to the failing check. Fixed by restoring the correct condition.
+
+![failing test](screenshots/exp10/04_failing_test.png)
+![devtools inspector](screenshots/exp10/06_devtools_inspector.png)
